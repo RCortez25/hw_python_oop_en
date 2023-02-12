@@ -1,10 +1,10 @@
 class InfoMessage:
-    """Информационное сообщение о тренировке."""
+    """Workout information message."""
     pass
 
 
 class Training:
-    """Базовый класс тренировки."""
+    """Base training class."""
 
     def __init__(self,
                  action: int,
@@ -14,44 +14,44 @@ class Training:
         pass
 
     def get_distance(self) -> float:
-        """Получить дистанцию в км."""
+        """Get distance in км."""
         pass
 
     def get_mean_speed(self) -> float:
-        """Получить среднюю скорость движения."""
+        """Get average moving speed."""
         pass
 
     def get_spent_calories(self) -> float:
-        """Получить количество затраченных калорий."""
+        """Get calories burned."""
         pass
 
     def show_training_info(self) -> InfoMessage:
-        """Вернуть информационное сообщение о выполненной тренировке."""
+        """Return an informational message about the completed workout."""
         pass
 
 
 class Running(Training):
-    """Тренировка: бег."""
+    """Training: Run."""
     pass
 
 
 class SportsWalking(Training):
-    """Тренировка: спортивная ходьба."""
+    """Workout: Race walking."""
     pass
 
 
 class Swimming(Training):
-    """Тренировка: плавание."""
+    """Workout: Swimming."""
     pass
 
 
 def read_package(workout_type: str, data: list) -> Training:
-    """Прочитать данные полученные от датчиков."""
+    """Read data received from sensors."""
     pass
 
 
 def main(training: Training) -> None:
-    """Главная функция."""
+    """Main function."""
     pass
 
 
