@@ -22,16 +22,18 @@ class InfoMessage:
     def get_message(self) -> str:
         """Show information about the workout."""
         return (f'Type of workout: {self.training_type}, '
-                f'Duration: {self.duration} hrs, '
-                f'Distance: {self.distance} km, '
-                f'Average speed: {self.speed} km/h, '
-                f'Calories burned: {self.calories}.')
+                f'Duration: {self.duration:.3f} hrs, '
+                f'Distance: {self.distance:.3f} km, '
+                f'Average speed: {self.speed:.3f} km/h, '
+                f'Calories burned: {self.calories:.3f}.')
 
 
 class Training:
     """Base training class."""
 
     M_IN_KM = 1000
+    LEN_STEP = 0.65
+    MIN_IN_H = 60
 
     def __init__(self,
                  action: int,
@@ -44,13 +46,13 @@ class Training:
 
     def get_distance(self) -> float:
         """Get distance in км."""
-        distance = round(self.action * (self.LEN_STEP / Training.M_IN_KM), 3)
+        distance = self.action * (self.LEN_STEP / Training.M_IN_KM)
         return distance
 
     def get_mean_speed(self) -> float:
         """Get average moving speed."""
         distance_covered = self.get_distance()
-        mean_speed = round(distance_covered / self.duration, 3)
+        mean_speed = distance_covered / self.duration
         return mean_speed
 
     def get_spent_calories(self) -> float:
@@ -71,8 +73,6 @@ class Running(Training):
 
     LEN_STEP = 0.65
 
-    # def __init__(self, action: int, duration: float, weight: float) -> None:
-    #     super().__init__(action, duration, weight)
     def get_spent_calories(self) -> float:
         average_speed = self.get_mean_speed()
         training_time_in_minutes = self.duration * 60
@@ -85,7 +85,8 @@ class Running(Training):
 class SportsWalking(Training):
     """Workout: Race walking."""
 
-    LEN_STEP = 0.4
+    # LEN_STEP = 0.4
+    LEN_STEP = 0.65
 
     def __init__(self,
                  action: int,
@@ -100,11 +101,11 @@ class SportsWalking(Training):
         average_speed_in_meters_per_second = mean_speed_in_meters / 3600
         height_in_meters = self.height / 100
         training_time_in_minutes = self.duration * 60
-        spent_calories = round((0.035 * self.weight
-                                + (average_speed_in_meters_per_second**2
-                                   / height_in_meters)
-                                * 0.029 * self.weight)
-                               * training_time_in_minutes, 3)
+        spent_calories = (0.035 * self.weight
+                          + (average_speed_in_meters_per_second**2
+                             / height_in_meters)
+                          * 0.029 * self.weight
+                          * training_time_in_minutes)
         return spent_calories
 
 
