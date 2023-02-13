@@ -7,24 +7,24 @@ from conftest import Capturing
 try:
     import homework
 except ModuleNotFoundError:
-    assert False, 'Не найден файл с домашней работой `homework.py`'
+    assert False, 'Homework file not found `homework.py`'
 except NameError as exc:
     name = re.findall("name '(\w+)' is not defined", str(exc))[0]
-    assert False, f'Класс {name} не обнаружен в файле домашней работы.'
+    assert False, f'Class {name} not found in homework file.'
 except ImportError:
-    assert False, 'Не найден файл с домашней работой `homework.py`'
+    assert False, 'Homework file not found `homework.py`'
 
 
 def test_read_package():
     assert hasattr(homework, 'read_package'), (
-        'Создайте функцию для обработки '
-        'входящего пакета - `read_package`'
+        'Create a function to handle '
+        'incoming packet - `read_package`'
     )
     assert callable(homework.read_package), (
-        '`read_package` должна быть функцией.'
+        '`read_package` should be a function.'
     )
     assert isinstance(homework.read_package, types.FunctionType), (
-        '`read_package` должна быть функцией.'
+        '`read_package` should be a function.'
     )
 
 
@@ -36,22 +36,22 @@ def test_read_package():
 def test_read_package_return(input_data, expected):
     result = homework.read_package(*input_data)
     assert result.__class__.__name__ == expected, (
-        'Функция `read_package` должна возвращать класс '
-        'вида спорта в зависимости от кода тренировки.'
+        'The `read_package` function must return a class '
+        'sport depending on the training code.'
     )
 
 
 def test_InfoMessage():
     assert inspect.isclass(homework.InfoMessage), (
-        '`InfoMessage` должен быть классом.'
+        '`InfoMessage` should be a class.'
     )
     info_message = homework.InfoMessage
     info_message_signature = inspect.signature(info_message)
     info_message_signature_list = list(info_message_signature.parameters)
     for p in ['training_type', 'duration', 'distance', 'speed', 'calories']:
         assert p in info_message_signature_list, (
-            'У метода `__init__` класса `InfoMessage` должен быть '
-            f'параметр {p}.'
+            'At the method `__init__` class `InfoMessage` should be '
+            f'parameter {p}.'
         )
 
 
